@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Deadline Alert</title>
+  <style>
+      /* Basic styling for email readability */
+      body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          background-color: #f4f4f4;
+          padding: 20px;
+      }
+      .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: #ffffff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      h1, p {
+          text-align: center;
+      }
+      .task-details {
+          margin-top: 20px;
+          border-top: 1px solid #ccc;
+          padding-top: 20px;
+      }
+      .task-details p {
+          margin-bottom: 10px;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Task Deadline Alert</h1>
+  <p>Hello <%= @task.user.email %>,</p>
+
+  <div class="task-details">
+    <p>Your task "<%= @task.title %>" is due soon. Please take action accordingly.</p>
+    <p><strong>Task Details:</strong></p>
+    <p><strong>Title:</strong> <%= @task.title %></p>
+    <p><strong>Deadline:</strong> <%= @task.deadline.strftime('%Y-%m-%d %H:%M') %></p>
+    <p><strong>Status:</strong> <%= @task.status.humanize %></p>
+  </div>
+
+  <p>Best regards,<br>Your Task Manager Team</p>
+</div>
+</body>
+</html>

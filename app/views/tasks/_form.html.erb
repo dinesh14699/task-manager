@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <%= form_with(model: task, local: true, html: { class: "mt-5" }) do |form| %>
+        <% if task.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+            <ul>
+              <% task.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :title do %>
+            Title <span class="required">*</span>
+          <% end %>
+          <%= form.text_field :title, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description do %>
+            Description
+          <% end %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :status do %>
+            Status <span class="required">*</span>
+          <% end %>
+          <%= form.select :status, options_for_select(Task.statuses.map { |key, _value| [key.humanize, key.humanize] }, selected: task.status), { include_blank: false }, { class: "form-control" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :deadline do %>
+            Deadline <span class="required">*</span>
+          <% end %>
+          <%= form.datetime_field :deadline, class: "form-control", required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
